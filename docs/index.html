@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>simple_usb - USB Device Access for Eiffel</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <header>
+        <h1>simple_usb</h1>
+        <p class="tagline">USB Device Access for Eiffel</p>
+        <div class="badges">
+            <span class="badge badge-version">v1.0.0</span>
+            <span class="badge badge-license">MIT</span>
+            <span class="badge">Windows</span>
+        </div>
+    </header>
+
+    <nav>
+        <ul>
+            <li><a href="#overview">Overview</a></li>
+            <li><a href="#quick-start">Quick Start</a></li>
+            <li><a href="#hid-devices">HID Devices</a></li>
+            <li><a href="#gamepads">Gamepads</a></li>
+            <li><a href="#api-reference">API Reference</a></li>
+            <li><a href="https://github.com/simple-eiffel/simple_usb">GitHub</a></li>
+        </ul>
+    </nav>
+
+    <main>
+        <section id="overview">
+            <h2>Overview</h2>
+            <p>
+                <strong>simple_usb</strong> provides USB device enumeration and HID device access
+                for Eiffel applications. It uses Windows SetupAPI and HID API for native access
+                without external dependencies.
+            </p>
+        </section>
+
+        <section id="quick-start">
+            <h2>Quick Start</h2>
+<pre><code><span class="keyword">local</span>
+    usb: <span class="type">SIMPLE_USB</span>
+<span class="keyword">do</span>
+    <span class="keyword">create</span> usb.make
+
+    <span class="comment">-- List all devices</span>
+    <span class="keyword">across</span> usb.devices <span class="keyword">as</span> d <span class="keyword">loop</span>
+        print (d.product_name + <span class="string">" ["</span> + d.id_string + <span class="string">"]%N"</span>)
+    <span class="keyword">end</span>
+<span class="keyword">end</span></code></pre>
+        </section>
+
+        <section id="hid-devices">
+            <h2>HID Devices</h2>
+<pre><code><span class="keyword">across</span> usb.hid_devices <span class="keyword">as</span> hid <span class="keyword">loop</span>
+    <span class="keyword">if</span> hid.open <span class="keyword">then</span>
+        <span class="keyword">if</span> <span class="keyword">attached</span> hid.read_report <span class="keyword">as</span> report <span class="keyword">then</span>
+            print (<span class="string">"Data: "</span> + report.to_hex_string + <span class="string">"%N"</span>)
+        <span class="keyword">end</span>
+        hid.close
+    <span class="keyword">end</span>
+<span class="keyword">end</span></code></pre>
+        </section>
+
+        <section id="gamepads">
+            <h2>Gamepads</h2>
+<pre><code><span class="keyword">across</span> usb.gamepads <span class="keyword">as</span> gp <span class="keyword">loop</span>
+    <span class="keyword">if</span> gp.open <span class="keyword">then</span>
+        <span class="keyword">if</span> gp.poll <span class="keyword">then</span>
+            print (<span class="string">"Left X: "</span> + gp.left_stick_x.out + <span class="string">"%N"</span>)
+            print (<span class="string">"Button 0: "</span> + gp.button (0).out + <span class="string">"%N"</span>)
+        <span class="keyword">end</span>
+        gp.close
+    <span class="keyword">end</span>
+<span class="keyword">end</span></code></pre>
+        </section>
+
+        <section id="api-reference">
+            <h2>API Reference</h2>
+
+            <h3>SIMPLE_USB</h3>
+            <table>
+                <tr><th>Method</th><th>Description</th></tr>
+                <tr><td><code>devices</code></td><td>All USB devices</td></tr>
+                <tr><td><code>hid_devices</code></td><td>All HID devices</td></tr>
+                <tr><td><code>gamepads</code></td><td>All gamepads</td></tr>
+                <tr><td><code>find_device (vid, pid)</code></td><td>Find by ID</td></tr>
+                <tr><td><code>refresh</code></td><td>Re-enumerate</td></tr>
+            </table>
+
+            <h3>USB_HID_DEVICE</h3>
+            <table>
+                <tr><th>Method</th><th>Description</th></tr>
+                <tr><td><code>open</code></td><td>Open for I/O</td></tr>
+                <tr><td><code>close</code></td><td>Close device</td></tr>
+                <tr><td><code>read_report</code></td><td>Read input report</td></tr>
+                <tr><td><code>write_report</code></td><td>Write output report</td></tr>
+            </table>
+        </section>
+    </main>
+
+    <footer>
+        <p>Part of the <a href="https://github.com/simple-eiffel">Simple Eiffel</a> ecosystem.</p>
+    </footer>
+</body>
+</html>
