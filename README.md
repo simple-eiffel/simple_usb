@@ -28,7 +28,7 @@ SIMPLE_USB provides USB device enumeration and HID device access using Windows S
 - **Gamepad support** - Specialized gamepad class with axes and buttons
 - **Arduino detection** - Find Arduino devices by known VID/PIDs
 
-Uses the Eric Bezault inline C pattern - no external DLLs required.
+Uses inline C externals - no external DLLs required.
 
 ## Quick Start
 
