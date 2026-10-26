@@ -134,7 +134,9 @@ set SIMPLE_EIFFEL=D:\prod
 
 ## Dependencies
 
-- simple_win32_api (Windows API types)
+- EiffelBase
+- setupapi.lib, hid.lib (Windows system libraries)
+- simple_testing (tests only)
 
 ## API Reference
 

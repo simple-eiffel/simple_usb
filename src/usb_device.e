@@ -113,7 +113,7 @@ feature -- Metadata
 			-- Human-readable display name.
 		do
 			if product_name.is_empty then
-				Result := "USB Device [" + id_string + "]"
+				Result := {STRING_32} "USB Device [" + id_string + "]"
 			else
 				Result := product_name
 			end

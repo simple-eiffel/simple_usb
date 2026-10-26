@@ -106,7 +106,7 @@ feature -- Open/Close
 				is_open := True
 				Result := True
 			else
-				last_error := "Failed to open device: " + device_path
+				last_error := {STRING_32} "Failed to open device: " + device_path
 				Result := False
 			end
 		ensure
