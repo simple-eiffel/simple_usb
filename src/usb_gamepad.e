@@ -53,6 +53,7 @@ feature {NONE} -- Initialization
 			
 			create buttons.make_filled (False, 0, Max_buttons - 1)
 			create axes.make_filled (0, 0, Max_axes - 1)
+			button_count := Default_button_count
 		end
 
 feature -- Configuration
@@ -62,6 +63,9 @@ feature -- Configuration
 
 	Max_axes: INTEGER = 8
 			-- Maximum number of axes.
+
+	Default_button_count: INTEGER = 12
+			-- Buttons on a common gamepad, until a report says otherwise.
 
 feature -- Button State
 
@@ -77,10 +81,8 @@ feature -- Button State
 		end
 
 	button_count: INTEGER
-			-- Number of buttons detected.
-		attribute
-			Result := 12  -- Common default
-		end
+			-- Number of buttons detected (2026-10-26: was an attribute body
+			-- that never ran, so always 0; now set at creation).
 
 feature -- Axis State
 

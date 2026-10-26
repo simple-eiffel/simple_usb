@@ -68,6 +68,7 @@ feature {NONE} -- Test Runners
 			-- Edge Case Tests: Find Operations
 			run_test (agent lib_tests.test_find_with_max_vid_pid, "test_find_with_max_vid_pid")
 			run_test (agent lib_tests.test_find_hid_nonexistent, "test_find_hid_nonexistent")
+			run_test (agent lib_tests.test_gamepad_default_button_count, "test_gamepad_default_button_count")
 		end
 
 feature {NONE} -- Test Infrastructure

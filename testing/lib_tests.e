@@ -139,7 +139,7 @@ feature -- Test: Find Device
 		do
 			create usb.make
 			if attached usb.find_arduino as arduino then
-				print ("Found Arduino: " + arduino.product_name + "%N")
+				print ({STRING_32} "Found Arduino: " + arduino.product_name + "%N")
 			else
 				print ("No Arduino connected%N")
 			end
@@ -322,6 +322,18 @@ feature -- Edge Case Tests: Find Operations
 		do
 			create usb.make
 			assert_true ("hid not found", usb.find_hid_device (0xDEAD, 0xBEEF) = Void)
+		end
+
+feature -- Gamepad
+
+	test_gamepad_default_button_count
+			-- A gamepad reports the common 12 buttons until told otherwise
+			-- (before 2026-10-26 the attribute body never ran: always 0).
+		local
+			l_pad: USB_GAMEPAD
+		do
+			create l_pad.make_from_hid (create {USB_TEST_HID_DEVICE}.make_gamepad)
+			assert_true ("twelve buttons: " + l_pad.button_count.out, l_pad.button_count = 12)
 		end
 
 end

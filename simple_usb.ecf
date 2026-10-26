@@ -19,7 +19,6 @@
 			<void_safety support="all" use="all"/>
 		</capability>
 		<library name="base" location="$ISE_LIBRARY/library/base/base.ecf"/>
-		<library name="wel" location="$ISE_LIBRARY/library/wel/wel.ecf"/>
 		<cluster name="src" location="./src/" recursive="true"/>
 		<external_include location="$SIMPLE_EIFFEL/simple_usb/Clib">
 			<description>Local C bridge header</description>
