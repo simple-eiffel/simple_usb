@@ -11,6 +11,8 @@
 
 #if defined(__APPLE__)
 #include "usb_bridge_mac.h"
+#elif defined(__linux__)
+#include "usb_bridge_linux.h"
 #elif !defined(_WIN32) && !defined(EIF_WINDOWS)
 #include "usb_bridge_none.h"
 #else
