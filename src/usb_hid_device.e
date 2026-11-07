@@ -201,7 +201,7 @@ feature -- Output
 feature {NONE} -- Implementation
 
 	device_handle: POINTER
-			-- Windows file handle for device.
+			-- Platform handle for the open device.
 
 feature {NONE} -- C Externals
 

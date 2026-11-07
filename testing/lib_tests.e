@@ -130,7 +130,7 @@ feature -- Test: Find Device
 			usb: SIMPLE_USB
 		do
 			create usb.make
-			assert_true ("not found", usb.find_device (0x0000, 0x0000) = Void)
+			assert_true ("not found", usb.find_device (0xFFFF, 0xFFFE) = Void)
 		end
 
 	test_find_arduino
