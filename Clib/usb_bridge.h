@@ -1,12 +1,19 @@
 /*
  * usb_bridge.h - USB HID Bridge for Eiffel
  *
- * Windows implementation using SetupAPI and HID API.
+ * Windows implementation using SetupAPI and HID API. macOS is in
+ * usb_bridge_mac.h; elsewhere usb_bridge_none.h finds no devices.
  * All functions are inline for Eric Bezault pattern.
  */
 
 #ifndef USB_BRIDGE_H
 #define USB_BRIDGE_H
+
+#if defined(__APPLE__)
+#include "usb_bridge_mac.h"
+#elif !defined(_WIN32) && !defined(EIF_WINDOWS)
+#include "usb_bridge_none.h"
+#else
 
 #include <windows.h>
 #include <setupapi.h>
@@ -300,5 +307,7 @@ static inline int usb_hid_get_feature_report(void* handle, void* buffer, int len
     }
     return -1;
 }
+
+#endif /* platform */
 
 #endif /* USB_BRIDGE_H */

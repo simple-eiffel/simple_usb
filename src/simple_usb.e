@@ -3,7 +3,7 @@ note
 		SIMPLE_USB - USB Device Access Library for Eiffel
 
 		Provides USB device enumeration, HID device access, and gamepad support
-		using Windows SetupAPI and HID API.
+		using SetupAPI and the HID API on Windows, and IOKit on macOS.
 
 		Example:
 			usb: SIMPLE_USB
@@ -57,7 +57,7 @@ feature -- Status
 	is_initialized: BOOLEAN
 			-- Is USB subsystem initialized?
 		do
-			Result := True  -- Always true on Windows
+			Result := True
 		end
 
 	device_count: INTEGER

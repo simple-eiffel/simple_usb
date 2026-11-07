@@ -20,7 +20,7 @@
 		</capability>
 		<library name="base" location="$ISE_LIBRARY/library/base/base.ecf"/>
 		<cluster name="src" location="./src/" recursive="true"/>
-		<external_include location="$SIMPLE_EIFFEL/simple_usb/Clib">
+		<external_include location="$(SIMPLE_EIFFEL)/simple_usb/Clib">
 			<description>Local C bridge header</description>
 		</external_include>
 		<external_library location="setupapi.lib">
@@ -33,6 +33,11 @@
 				<platform value="windows"/>
 			</condition>
 		</external_library>
+		<external_linker_flag value="-framework IOKit -framework CoreFoundation">
+			<condition>
+				<platform value="macintosh"/>
+			</condition>
+		</external_linker_flag>
 	</target>
 	<target name="simple_usb_tests" extends="simple_usb">
 		<root class="TEST_APP" feature="make"/>
