@@ -17,11 +17,11 @@ Part of the [Simple Eiffel](https://github.com/simple-eiffel) ecosystem.
 
 ## Status
 
-**Development** - Windows-only, HID device support
+**Development** - HID device support on Windows, macOS and Linux
 
 ## Overview
 
-SIMPLE_USB provides USB device enumeration and HID device access using Windows SetupAPI and HID API. Features include:
+SIMPLE_USB provides USB device enumeration and HID device access using SetupAPI/HID on Windows, IOKit on macOS and hidraw on Linux. Features include:
 
 - **Device enumeration** - List all USB/HID devices with VID, PID, names
 - **HID device access** - Read/write HID reports
@@ -126,6 +126,10 @@ end
 ```batch
 set SIMPLE_EIFFEL=D:\prod
 ```
+On macOS or Linux:
+```bash
+export SIMPLE_EIFFEL=$HOME/simple_eiffel
+```
 
 2. Add to your ECF file:
 ```xml
@@ -135,7 +139,7 @@ set SIMPLE_EIFFEL=D:\prod
 ## Dependencies
 
 - EiffelBase
-- setupapi.lib, hid.lib (Windows system libraries)
+- setupapi.lib, hid.lib (Windows system libraries); IOKit and CoreFoundation on macOS; nothing extra on Linux
 - simple_testing (tests only)
 
 ## API Reference
@@ -187,9 +191,13 @@ set SIMPLE_EIFFEL=D:\prod
 
 ## Platform Support
 
-Currently Windows-only. Uses:
-- SetupAPI for device enumeration
-- HID API for HID device access
+HID devices only.
+
+- **Windows**: SetupAPI for device enumeration, HID API for HID device access
+- **macOS**: IOKit HID Manager. Keyboards and mice may need the Input Monitoring permission.
+- **Linux**: hidraw and sysfs. Opening a device needs a udev rule or root.
+
+Tests list devices and use a fake gamepad; real device I/O is untested on every platform.
 
 ## License
 
