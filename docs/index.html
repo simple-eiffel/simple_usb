@@ -99,6 +99,19 @@
                 <tr><td><code>write_report</code></td><td>Write output report</td></tr>
             </table>
         </section>
+
+        <section id="platforms">
+            <h2>Platforms</h2>
+            <p>Tested on Windows, Linux and macOS (see the README's badges).</p>
+            <p>HID devices only.</p>
+            <ul>
+                <li><strong>Windows</strong>: SetupAPI for device enumeration, HID API for HID device access</li>
+                <li><strong>macOS</strong>: IOKit HID Manager. Keyboards and mice may need the Input Monitoring permission.</li>
+                <li><strong>Linux</strong>: hidraw and sysfs. Opening a device needs a udev rule or root.</li>
+            </ul>
+            <p>Tests list devices and use a fake gamepad; real device I/O is untested on every platform.</p>
+        </section>
+
     </main>
 
     <footer>
